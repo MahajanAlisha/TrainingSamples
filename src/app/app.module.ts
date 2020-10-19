@@ -1,16 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';  
 
 import { AppComponent } from './app.component';
+import { DataService } from './data.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    CommonModule,
+    BrowserModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    DataService,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

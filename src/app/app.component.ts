@@ -27,7 +27,9 @@ export class AppComponent {
       this.dataLoaded = true;
       this.updateLoadBtnTitle();
     }
-    this.users = this.dataService.loadUserData();
+    this.dataService.getUserList().subscribe(
+      users => this.users = users
+    );
   }
 
   updateLoadBtnTitle() {

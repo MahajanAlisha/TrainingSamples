@@ -1,11 +1,12 @@
-import { IUserData } from './i-user'
+import { IUserData, RoleType } from './i-user'
 
 export const kInvalidIndex = -1;
 export class UserRecord implements IUserData {
     constructor(
+        public id : number,
         public firstName: String,
         public email: String,
-        public role: String = "Moderator",
+        public role: RoleType = RoleType.SUBSCRIBER,
         public middleName?: String,
         public lastName?: String,
         public phone?: Number,
@@ -31,8 +32,8 @@ export class UserList {
     }
 
     private buildUserList() {
-        this.userList.push(new UserRecord('Alex', 'alex@gmail.com'));
-        this.userList.push(new UserRecord('Steve', 'ssmith@gmail.com', 'Admin', '' ,'Smith', 9878987800, 'US', new Date(), new Date()));
+        this.userList.push(new UserRecord(1, 'Alex', 'alex@gmail.com'));
+        this.userList.push(new UserRecord(2, 'Steve', 'ssmith@gmail.com', RoleType.ADMIN, '' ,'Smith', 9878987800, 'US', new Date(), new Date()));
     }
 
     get userList(): IUserData[] {

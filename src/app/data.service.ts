@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs'
+
 import { IUserData } from './i-user';
-import { UserList } from './mock-users';
+import {GenericCrudService} from './generic-crud.service'
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-  userRecord : IUserData[] = [];
 
-  constructor() {}
+export class DataService extends GenericCrudService<IUserData, number> {
+  private userListURL = 'api/userList';  // URL to web api
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  loadUserData() {
-    let userRecordList = new UserList();
-
-    this.userRecord = Object.assign([],  userRecordList.userList);
-    return this.userRecord;
+  constructor(private http: HttpClient) {
+      super(http, 'api/userList');
   }
+
+  getUserList(): Observable<IUserData[]> {
+    return this.http.get<IUserData[]>(this.userListURL);
+  }
+
 }
